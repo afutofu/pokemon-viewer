@@ -42,16 +42,28 @@ const RatingBar = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 105%;
+  height: 100%;
   width: ${(props) => (props.width ? props.width : "0%")};
   transform: translateX(-100%);
   background: ${(props) =>
     props.background ? props.background : "greenyellow"};
   z-index: 0;
-  animation: ${slideIn} 1s 0.2s ease forwards;
+  animation: ${slideIn} 1s 0.4s ease forwards;
 `;
 
 const RatingBox = ({ title, rating, delay }) => {
+  const widthMultiplier = (widthPerc) => {
+    if (widthPerc > 90) return 1 * widthPerc;
+    else if (widthPerc > 80) return 1.05 * widthPerc;
+    else if (widthPerc > 70) return 1.1 * widthPerc;
+    else if (widthPerc > 60) return 1.15 * widthPerc;
+    else if (widthPerc > 50) return 1.2 * widthPerc;
+    else if (widthPerc > 40) return 1.3 * widthPerc;
+    else if (widthPerc > 30) return 1.4 * widthPerc;
+    else if (widthPerc > 20) return 1.5 * widthPerc;
+    else return 1.6 * widthPerc;
+  };
+
   const percentageToColor = (perc) => {
     // console.log(perc);
     // let r,
@@ -67,8 +79,6 @@ const RatingBox = ({ title, rating, delay }) => {
     // let h = r * 0x10000 + g * 0x100 + b * 0x1;
     // return "#" + ("000000" + h.toString(16)).slice(-6);
 
-    console.log(perc);
-
     if (perc <= 10) return "#f34444";
     else if (perc <= 24) return "#ff7f0f";
     else if (perc <= 35) return "#ffdd57";
@@ -82,7 +92,7 @@ const RatingBox = ({ title, rating, delay }) => {
       {/* <Title>{title}</Title> */}
       <Rating>{rating}</Rating>
       <RatingBar
-        width={`${(rating / 255) * 100}%`}
+        width={`${widthMultiplier((rating / 255) * 100)}%`}
         background={`${percentageToColor((rating / 255) * 100)}`}
       />
     </RatingBoxComp>

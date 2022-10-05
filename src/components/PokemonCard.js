@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import TypePlaque from "./TypePlaque";
 
+import typeToColor from "../shared/typeToColor";
+
 const PokemonCardComp = styled.a`
   position: relative;
   width: 250px;
@@ -12,9 +14,13 @@ const PokemonCardComp = styled.a`
   color: black;
   text-decoration: none;
   background-color: white;
+  transition: box-shadow 0.2s ease;
 
   :hover {
-    border: 1px solid #aaa;
+    border: 1px solid
+      ${(props) => (props.type ? typeToColor(props.type) : "#aaa")};
+    box-shadow: 0px 0px 10px 1px
+      ${(props) => (props.type ? typeToColor(props.type) : "#aaa")};
   }
 
   > p {
@@ -57,7 +63,11 @@ const Types = styled.div`
 
 const PokemonCard = ({ pokemon, innerRef }) => {
   return (
-    <PokemonCardComp href={`/pokemon/${pokemon.name}`} ref={innerRef}>
+    <PokemonCardComp
+      href={`/pokemon/${pokemon.name}`}
+      ref={innerRef}
+      type={pokemon.types[0].type.name}
+    >
       <p>{pokemon.id}</p>
       <PokeImage
         src={pokemon.sprites.other["official-artwork"].front_default}
