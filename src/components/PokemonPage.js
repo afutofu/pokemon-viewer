@@ -206,6 +206,14 @@ const Capitalize = styled.span`
   text-transform: capitalize;
 `;
 
+const CenterContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
 const PokemonPage = () => {
   const location = useLocation();
   const pokemonName = location.pathname.split("/")[2];
@@ -213,7 +221,11 @@ const PokemonPage = () => {
   const { loading, pokemon } = useGetPokemon(pokemonName);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <CenterContainer>
+        <Spinner />
+      </CenterContainer>
+    );
   }
 
   return (

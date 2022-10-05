@@ -175,7 +175,6 @@ const HomePage = () => {
           placeholder="Enter pokemon name or ID..."
         />
       </Header>
-
       <CardContainer>{renderPokemons()}</CardContainer>
     </HomePageComp>
   );
