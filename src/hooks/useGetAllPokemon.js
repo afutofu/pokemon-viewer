@@ -40,7 +40,7 @@ const useGetPokemons = (pokemonName, offset) => {
       axios({
         method: "GET",
         url: "https://pokeapi.co/api/v2/pokemon",
-        params: { limit: 40, offset },
+        params: { limit: 50, offset },
       })
         .then(async (res) => {
           const promises = res.data.results.map(async (pokemon) => {

@@ -24,13 +24,6 @@ const RatingBoxComp = styled.div`
   border-radius: 10px;
 `;
 
-const Title = styled.p`
-  position: relative;
-  text-transform: capitalize;
-  margin: 0;
-  z-index: 100;
-`;
-
 const Rating = styled.p`
   position: absolute;
   /* opacity: 0; */
@@ -89,7 +82,6 @@ const RatingBox = ({ title, rating, delay }) => {
 
   return (
     <RatingBoxComp>
-      {/* <Title>{title}</Title> */}
       <Rating>{rating}</Rating>
       <RatingBar
         width={`${widthMultiplier((rating / 255) * 100)}%`}

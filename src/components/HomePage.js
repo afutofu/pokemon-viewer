@@ -14,7 +14,7 @@ const HomePageComp = styled.div`
   justify-content: flex-start;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  background-color: #eee;
+  background-color: #fefefe;
 `;
 
 const Header = styled.header`
@@ -75,7 +75,7 @@ const HomePage = () => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          setOffset((prevOffset) => prevOffset + 40);
+          setOffset((prevOffset) => prevOffset + 50);
         }
       });
       if (node) observer.current.observe(node);
@@ -102,7 +102,7 @@ const HomePage = () => {
 
       <CardContainer>
         {pokemons.map((pokemon, index) => {
-          if (index === pokemons.length - 16) {
+          if (index === pokemons.length - 25) {
             return (
               <PokemonCard
                 innerRef={last15PokemonElementRef}

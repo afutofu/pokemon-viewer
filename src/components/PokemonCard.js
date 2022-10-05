@@ -7,7 +7,7 @@ import typeToColor from "../shared/typeToColor";
 
 const PokemonCardComp = styled.a`
   position: relative;
-  width: 250px;
+  width: 210px;
   /* height: 350px; */
   border: 1px solid #000;
   border-radius: 10px;
@@ -15,6 +15,8 @@ const PokemonCardComp = styled.a`
   text-decoration: none;
   background-color: white;
   transition: box-shadow 0.2s ease;
+  overflow: hidden;
+  box-shadow: 2px 2px 1px 1px #ccc;
 
   :hover {
     border: 1px solid
@@ -34,7 +36,11 @@ const PokemonCardComp = styled.a`
 
 const PokeImage = styled.img`
   width: 100%;
-  height: 220px;
+  /* height: 220px; */
+  padding: 10px;
+  padding-top: 25px;
+  box-sizing: border-box;
+  background-color: white;
 `;
 
 const Content = styled.div`
@@ -43,12 +49,15 @@ const Content = styled.div`
   flex-direction: column;
   justify-items: center;
   align-items: center;
+  border-top: 1px solid #000;
+  background-color: rgb(245, 245, 245);
 `;
 
 const Name = styled.h1`
   text-transform: capitalize;
-  margin: 0;
   margin-bottom: 10px;
+  margin-top: 15px;
+  /* margin-bottom: 10px; */
   font-size: 22px;
 `;
 

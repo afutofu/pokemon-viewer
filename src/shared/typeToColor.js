@@ -36,6 +36,8 @@ const typeToColor = (type) => {
       return "#aab";
     case "fairy":
       return "#e9e";
+    default:
+      return "black";
   }
 };
 
