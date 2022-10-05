@@ -77,7 +77,7 @@ const useGetPokemons = (pokemonName, offset) => {
         .catch((error) => {
           setError(true);
         });
-    }
+    } // eslint-disable-next-line
   }, [pokemonName, offset]);
 
   return {

@@ -84,7 +84,7 @@ const HomePage = () => {
         }
       });
       if (node) observer.current.observe(node);
-    },
+    }, // eslint-disable-next-line
     [loading, hasMore]
   );
 
