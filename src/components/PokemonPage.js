@@ -6,6 +6,9 @@ import useGetPokemon from "../hooks/useGetPokemon";
 
 import RatingBox from "./RatingBox";
 import Spinner from "./Spinner";
+import TypePlaque from "./TypePlaque";
+
+import typeToColor from "../shared/typeToColor";
 
 const PokemonPageComp = styled.div`
   position: relative;
@@ -17,9 +20,39 @@ const PokemonPageComp = styled.div`
   font-family: "Montserrat", sans-serif;
 `;
 
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: ${(props) =>
+    props.type ? typeToColor(props.type) : "white"};
+  height: 70px;
+  margin-bottom: 20px;
+
+  a {
+    position: absolute;
+    color: white;
+    left: 100px;
+    font-weight: 600;
+    text-decoration: none;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+
+  h3 {
+    text-shadow: 0px 0px 5px #000;
+  }
+`;
+
 const Name = styled.h1`
-  text-transform: capitalize;
-  margin-bottom: 30px;
+  text-transform: uppercase;
+  margin: 0;
+  color: white;
+  text-shadow: 0px 0px 5px #000;
 `;
 
 const FrontContent = styled.div`
@@ -36,7 +69,7 @@ const Info = styled.div`
   align-items: flex-start;
   flex-basis: 1;
 
-  div {
+  > div {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -48,6 +81,7 @@ const Info = styled.div`
     text-transform: capitalize;
     text-align: right;
     margin-right: 20px;
+    font-weight: 600;
   }
 
   p {
@@ -63,9 +97,9 @@ const PokeImage = styled.img`
 `;
 
 const Ratings = styled.div`
-  width: 70%;
+  width: 50%;
   position: relative;
-  right: 5%;
+  right: 6%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -85,6 +119,7 @@ const Rating = styled.div`
     text-transform: capitalize;
     text-align: right;
     margin-right: 20px;
+    font-weight: 600;
   }
 `;
 
@@ -104,7 +139,12 @@ const PokemonPage = () => {
 
   return (
     <PokemonPageComp>
-      <Name>{pokemon.name}</Name>
+      <Header type={pokemon.types[0].type.name}>
+        <a href="/">
+          <h3>Back</h3>
+        </a>
+        <Name type={pokemon.types[0].type.name}>{pokemon.name}</Name>
+      </Header>
       <FrontContent>
         <PokeImage
           src={pokemon.sprites.other["official-artwork"].front_default}
@@ -116,11 +156,11 @@ const PokemonPage = () => {
           </div>
           <div>
             <h3>Height</h3>
-            <p>{pokemon.height} cm</p>
+            <p>{pokemon.height / 10} m</p>
           </div>
           <div>
             <h3>Weight</h3>
-            <p>{pokemon.weight} kg</p>
+            <p>{pokemon.weight / 10} kg</p>
           </div>
           <div>
             <h3>Abilities</h3>
@@ -134,7 +174,7 @@ const PokemonPage = () => {
             <h3>Type</h3>
             {pokemon.types.map((type) => (
               <p>
-                <Capitalize>{type.type.name}</Capitalize>
+                <TypePlaque>{type.type.name}</TypePlaque>
               </p>
             ))}
           </div>

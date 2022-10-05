@@ -32,8 +32,9 @@ const Title = styled.p`
 `;
 
 const Rating = styled.p`
-  position: relative;
+  position: absolute;
   /* opacity: 0; */
+  right: 10px;
   z-index: 100;
 `;
 
@@ -41,13 +42,13 @@ const RatingBar = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 105%;
   width: ${(props) => (props.width ? props.width : "0%")};
   transform: translateX(-100%);
   background: ${(props) =>
     props.background ? props.background : "greenyellow"};
   z-index: 0;
-  animation: ${slideIn} 1s 1s ease forwards;
+  animation: ${slideIn} 1s 0.2s ease forwards;
 `;
 
 const RatingBox = ({ title, rating, delay }) => {
@@ -78,7 +79,7 @@ const RatingBox = ({ title, rating, delay }) => {
 
   return (
     <RatingBoxComp>
-      <Title>{title}</Title>
+      {/* <Title>{title}</Title> */}
       <Rating>{rating}</Rating>
       <RatingBar
         width={`${(rating / 255) * 100}%`}

@@ -8,11 +8,13 @@ import PokemonCard from "./PokemonCard";
 const HomePageComp = styled.div`
   position: relative;
   width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-family: "Montserrat", sans-serif;
+  background-color: #eee;
 `;
 
 const Header = styled.header`
@@ -39,10 +41,12 @@ const Header = styled.header`
 `;
 
 const PokemonSearchInput = styled.input`
-  height: 30px;
+  height: 40px;
   width: 30%;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
+  padding: 10px;
+  box-sizing: border-box;
 `;
 
 const CardContainer = styled.div`
@@ -89,7 +93,11 @@ const HomePage = () => {
       <Header>
         <h2>Gokomodo Pokedex</h2>
         <h3>Muhammad Afuzarahman</h3>
-        <PokemonSearchInput onChange={handleSearch} value={pokemonName} />
+        <PokemonSearchInput
+          onChange={handleSearch}
+          value={pokemonName}
+          placeholder="Enter pokemon name or ID..."
+        />
       </Header>
 
       <CardContainer>
