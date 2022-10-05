@@ -59,7 +59,12 @@ const FrontContent = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+
+  @media only screen and (max-width: 1200px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 
 const Info = styled.div`
@@ -67,12 +72,23 @@ const Info = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  flex-basis: 1;
+
+  @media only screen and (max-width: 450px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    font-size: 10px;
+  }
 
   > div {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+
+    :last-of-type {
+      margin: 0;
+    }
   }
 
   h3 {
@@ -82,6 +98,10 @@ const Info = styled.div`
     text-align: right;
     margin-right: 20px;
     font-weight: 600;
+
+    @media only screen and (max-width: 450px) {
+      width: 70px;
+    }
   }
 
   p {
@@ -92,12 +112,35 @@ const Info = styled.div`
 const MarginRight = styled.div`
   margin: 0;
   margin-right: 15px;
+
+  @media only screen and (max-width: 450px) {
+    margin-right: 10px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    margin-right: 7px;
+  }
 `;
 
 const PokeImage = styled.img`
   width: 350px;
   height: 350px;
-  flex-basis: 1;
+
+  @media only screen and (max-width: 1200px) {
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 30px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
 `;
 
 const Ratings = styled.div`
@@ -109,6 +152,18 @@ const Ratings = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex: 0.5;
+
+  @media only screen and (max-width: 1200px) {
+    width: 60%;
+  }
+
+  @media only screen and (max-width: 800px) {
+    right: 0;
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 80%;
+  }
 `;
 
 const Rating = styled.div`
@@ -117,6 +172,19 @@ const Rating = styled.div`
   align-items: center;
   margin-bottom: 15px;
 
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    font-size: 10px;
+  }
+
   h3 {
     margin: 0;
     width: 300px;
@@ -124,6 +192,13 @@ const Rating = styled.div`
     text-align: right;
     margin-right: 20px;
     font-weight: 600;
+
+    @media only screen and (max-width: 800px) {
+      width: 100%;
+      text-align: left;
+      margin: 0;
+      margin-bottom: 10px;
+    }
   }
 `;
 

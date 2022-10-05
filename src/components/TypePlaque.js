@@ -13,6 +13,14 @@ const TypePlaqueComp = styled.div`
   border-radius: 5px;
   margin: 0;
   text-shadow: 0px 0px 0px #000;
+
+  @media only screen and (max-width: 450px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    font-size: 10px;
+  }
 `;
 
 const TypePlaque = ({ children }) => {

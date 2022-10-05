@@ -29,16 +29,52 @@ const Header = styled.header`
   height: 70px;
   margin-bottom: 20px;
 
+  @media only screen and (max-width: 1200px) {
+    font-size: 14px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    font-size: 10px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 12px;
+    height: 120px;
+  }
+
   h2 {
     position: absolute;
     color: white;
     left: 100px;
+
+    @media only screen and (max-width: 1200px) {
+      left: 50px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      position: relative;
+      left: 0;
+      margin: 0;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
   }
 
   h3 {
     position: absolute;
     color: white;
     right: 100px;
+
+    @media only screen and (max-width: 1200px) {
+      right: 50px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      position: relative;
+      right: 0;
+      margin: 0;
+      margin-bottom: 10px;
+    }
   }
 `;
 
@@ -49,6 +85,21 @@ const PokemonSearchInput = styled.input`
   font-size: 16px;
   padding: 10px;
   box-sizing: border-box;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 14px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    font-size: 10px;
+    height: 30px;
+    padding: 5px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 200px;
+    font-size: 12px;
+  }
 `;
 
 const CardContainer = styled.div`
