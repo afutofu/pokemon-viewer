@@ -1,9 +1,11 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useContext } from "react";
 import styled from "styled-components";
 
 import useGetAllPokemon from "../hooks/useGetAllPokemon";
 
 import PokemonCard from "./PokemonCard";
+
+import { PokemonContext } from "../context/PokemonContext";
 
 const HomePageComp = styled.div`
   position: relative;
@@ -64,9 +66,12 @@ const CardContainer = styled.div`
 
 const HomePage = () => {
   const [pokemonName, setPokemonName] = useState("");
-  const [offset, setOffset] = useState(0);
+  const { offset, setOffset } = useContext(PokemonContext).offset;
 
-  const { loading, pokemons, hasMore } = useGetAllPokemon(pokemonName, offset);
+  const { loading, pokemons, pokemonSearch, hasMore } = useGetAllPokemon(
+    pokemonName,
+    offset
+  );
 
   const observer = useRef();
   const last15PokemonElementRef = useCallback(
@@ -85,7 +90,27 @@ const HomePage = () => {
 
   const handleSearch = (e) => {
     setPokemonName(e.target.value);
-    setOffset(0);
+  };
+
+  const renderPokemons = () => {
+    if (pokemonName.length > 0) {
+      return pokemonSearch.map((pokemon, index) => {
+        return <PokemonCard key={pokemon.id + index} pokemon={pokemon} />;
+      });
+    } else {
+      return pokemons.map((pokemon, index) => {
+        if (index === pokemons.length - 15) {
+          return (
+            <PokemonCard
+              innerRef={last15PokemonElementRef}
+              key={pokemon.id + index}
+              pokemon={pokemon}
+            />
+          );
+        }
+        return <PokemonCard key={pokemon.id + index} pokemon={pokemon} />;
+      });
+    }
   };
 
   return (
@@ -100,20 +125,7 @@ const HomePage = () => {
         />
       </Header>
 
-      <CardContainer>
-        {pokemons.map((pokemon, index) => {
-          if (index === pokemons.length - 25) {
-            return (
-              <PokemonCard
-                innerRef={last15PokemonElementRef}
-                key={pokemon.id}
-                pokemon={pokemon}
-              />
-            );
-          }
-          return <PokemonCard key={pokemon.id} pokemon={pokemon} />;
-        })}
-      </CardContainer>
+      <CardContainer>{renderPokemons()}</CardContainer>
     </HomePageComp>
   );
 };

@@ -1,11 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
+import { PokemonContext } from "../context/PokemonContext";
+
 const useGetPokemons = (pokemonName, offset) => {
+  const { pokemon } = useContext(PokemonContext);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemonSearch, setPokemonSearch] = useState([]);
   const [hasMore, setHasMore] = useState(false);
+
+  const limit = 50;
 
   const getPokemonData = async (pokemon) => {
     const url = pokemon.url;
@@ -16,7 +22,7 @@ const useGetPokemons = (pokemonName, offset) => {
   };
 
   useEffect(() => {
-    setPokemons([]);
+    setPokemonSearch([]);
   }, [pokemonName]);
 
   useEffect(() => {
@@ -31,7 +37,7 @@ const useGetPokemons = (pokemonName, offset) => {
         .then((res) => {
           setHasMore(false);
           setLoading(false);
-          setPokemons([res.data]);
+          setPokemonSearch([res.data]);
         })
         .catch((error) => {
           setError(true);
@@ -40,7 +46,7 @@ const useGetPokemons = (pokemonName, offset) => {
       axios({
         method: "GET",
         url: "https://pokeapi.co/api/v2/pokemon",
-        params: { limit: 50, offset },
+        params: { limit, offset },
       })
         .then(async (res) => {
           const promises = res.data.results.map(async (pokemon) => {
@@ -51,7 +57,22 @@ const useGetPokemons = (pokemonName, offset) => {
 
           setHasMore(res.data.next !== null);
           setLoading(false);
-          setPokemons((prevPokemons) => [...prevPokemons, ...pokemonsTemp]);
+
+          pokemon.setStorePokemons((prevPokemons) => {
+            // Only add new pokemon if not already the same to avoid duplication
+            if (prevPokemons.length > 0) {
+              if (
+                pokemonsTemp[pokemonsTemp.length - 1].id ===
+                prevPokemons[prevPokemons.length - 1].id
+              ) {
+                return [...prevPokemons];
+              } else {
+                return [...prevPokemons, ...pokemonsTemp];
+              }
+            } else {
+              return [...prevPokemons, ...pokemonsTemp];
+            }
+          });
         })
         .catch((error) => {
           setError(true);
@@ -59,7 +80,13 @@ const useGetPokemons = (pokemonName, offset) => {
     }
   }, [pokemonName, offset]);
 
-  return { loading, error, pokemons, hasMore };
+  return {
+    loading,
+    error,
+    pokemons: pokemon.storePokemons,
+    pokemonSearch,
+    hasMore,
+  };
 };
 
 export default useGetPokemons;

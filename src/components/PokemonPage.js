@@ -86,8 +86,12 @@ const Info = styled.div`
 
   p {
     margin: 0;
-    margin-right: 15px;
   }
+`;
+
+const MarginRight = styled.div`
+  margin: 0;
+  margin-right: 15px;
 `;
 
 const PokeImage = styled.img`
@@ -140,9 +144,6 @@ const PokemonPage = () => {
   return (
     <PokemonPageComp>
       <Header type={pokemon.types[0].type.name}>
-        <a href="/">
-          <h3>Back</h3>
-        </a>
         <Name type={pokemon.types[0].type.name}>{pokemon.name}</Name>
       </Header>
       <FrontContent>
@@ -164,18 +165,18 @@ const PokemonPage = () => {
           </div>
           <div>
             <h3>Abilities</h3>
-            {pokemon.abilities.map((ability) => (
-              <p>
+            {pokemon.abilities.map((ability, index) => (
+              <MarginRight key={index + ability.ability.name}>
                 <Capitalize>{ability.ability.name}</Capitalize>
-              </p>
+              </MarginRight>
             ))}
           </div>
           <div>
             <h3>Type</h3>
-            {pokemon.types.map((type) => (
-              <p>
+            {pokemon.types.map((type, index) => (
+              <MarginRight key={index + type.type.name}>
                 <TypePlaque>{type.type.name}</TypePlaque>
-              </p>
+              </MarginRight>
             ))}
           </div>
         </Info>
@@ -183,7 +184,7 @@ const PokemonPage = () => {
       <Ratings>
         {pokemon.stats.map((stat, index) => {
           return (
-            <Rating id={stat.stat.name}>
+            <Rating key={index + stat.stat.name}>
               <h3>{stat.stat.name}</h3>
               <RatingBox
                 // title={stat.stat.name}

@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import TypePlaque from "./TypePlaque";
 
 import typeToColor from "../shared/typeToColor";
 
-const PokemonCardComp = styled.a`
+const PokemonCardComp = styled.div`
   position: relative;
   width: 210px;
   /* height: 350px; */
@@ -21,7 +22,7 @@ const PokemonCardComp = styled.a`
   :hover {
     border: 1px solid
       ${(props) => (props.type ? typeToColor(props.type) : "#aaa")};
-    box-shadow: 0px 0px 10px 1px
+    box-shadow: 0px 0px 10px 5px
       ${(props) => (props.type ? typeToColor(props.type) : "#aaa")};
   }
 
@@ -72,25 +73,27 @@ const Types = styled.div`
 
 const PokemonCard = ({ pokemon, innerRef }) => {
   return (
-    <PokemonCardComp
-      href={`/pokemon/${pokemon.name}`}
+    <Link
+      to={`/pokemon/${pokemon.name}`}
       ref={innerRef}
-      type={pokemon.types[0].type.name}
+      style={{ textDecoration: "none" }}
     >
-      <p>{pokemon.id}</p>
-      <PokeImage
-        src={pokemon.sprites.other["official-artwork"].front_default}
-        alt="pokemon official artwork"
-      />
-      <Content>
-        <Name>{pokemon.name}</Name>
-        <Types>
-          {pokemon.types.map((type, index) => (
-            <TypePlaque key={pokemon.id + index}>{type.type.name}</TypePlaque>
-          ))}
-        </Types>
-      </Content>
-    </PokemonCardComp>
+      <PokemonCardComp type={pokemon.types[0].type.name}>
+        <p>{pokemon.id}</p>
+        <PokeImage
+          src={pokemon.sprites.other["official-artwork"].front_default}
+          alt="pokemon official artwork"
+        />
+        <Content>
+          <Name>{pokemon.name}</Name>
+          <Types>
+            {pokemon.types.map((type, index) => (
+              <TypePlaque key={pokemon.id + index}>{type.type.name}</TypePlaque>
+            ))}
+          </Types>
+        </Content>
+      </PokemonCardComp>
+    </Link>
   );
 };
 
