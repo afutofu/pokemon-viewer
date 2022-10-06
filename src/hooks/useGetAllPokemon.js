@@ -30,6 +30,8 @@ const useGetPokemons = (pokemonName, offset) => {
     setError(false);
 
     if (pokemonName.length > 0) {
+      // eslint-disable-next-line
+      pokemonName = pokemonName.toLowerCase();
       axios({
         method: "GET",
         url: `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
