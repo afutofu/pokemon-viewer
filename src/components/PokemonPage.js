@@ -59,11 +59,12 @@ const FrontContent = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
   @media only screen and (max-width: 1200px) {
     flex-direction: column;
     justify-content: flex-start;
+    margin-bottom: 40px;
   }
 `;
 
