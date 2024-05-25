@@ -1,4 +1,4 @@
-# Pokemon Viewer for Gokomodo Technical Test | Muhammad Afuzarahman
+# Pokemon Viewer
 
 Pokemon Viewer using PokeAPI
 
@@ -6,7 +6,7 @@ Website Link: [https://pokemon-viewer-afuza.netlify.app](https://pokemon-viewer-
 
 Technologies used:
 
-- [React](https://reactjs.org/) - Frontend framework
+- [React](https://reactjs.org/)
 
 How to run site locally:
 
